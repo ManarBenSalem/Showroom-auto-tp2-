@@ -1,0 +1,78 @@
+<app-head-bar (viewChanged)="toggleView($event)"></app-head-bar>
+
+<!-- Vue Recherche -->
+@if (currentView === 'search') {
+  <app-search-bar [autos]="autoList" (onSelectAuto)="selectAuto($event)"></app-search-bar>
+  
+  @if(selectedAuto) {
+    <div class="container">
+      <div class="row">
+        <div class="col-4">
+          <img [src]="selectedAuto.photo" />
+        </div>
+        <div class="col-4">
+          <h4>{{selectedAuto.brand}} {{selectedAuto.model}}</h4>
+          <p>{{selectedAuto.description}}</p>
+        </div>
+      </div>
+    </div>
+  }
+}
+
+<!-- Vue Favoris -->
+@if (currentView === 'favorites') {
+  <div class="container mt-4 favorites-view">
+    <div class="favorites-header text-center mb-4">
+      <h2 class="text-success">❤️ Mes Voitures Favorites</h2>
+      <p class="text-muted">{{ getFavoriteCars().length }} voiture(s) favorite(s)</p>
+      
+      @if (getFavoriteCars().length > 0) {
+        <button class="btn btn-danger btn-sm mb-3" (click)="clearAllFavorites()">
+          ❌ Vider tous les favoris
+        </button>
+      }
+    </div>
+
+    @if (getFavoriteCars().length === 0) {
+      <div class="empty-favorites text-center py-5">
+        <div class="empty-icon" style="font-size: 4rem;">🤍</div>
+        <h3 class="mt-3">Aucune voiture favorite</h3>
+        <p class="text-muted">Ajoutez des voitures à vos favoris en cliquant sur le cœur ❤️</p>
+        <p class="text-muted">Les favoris sont sauvegardés même après fermeture du navigateur</p>
+        <button class="btn btn-success mt-3" (click)="toggleView('search')">
+          ← Retourner à la recherche
+        </button>
+      </div>
+    } @else {
+      <div class="row">
+        @for (auto of getFavoriteCars(); track auto.id) {
+          <div class="col-md-4 col-lg-3 mb-4">
+            <div class="card h-100 shadow-sm">
+              <img [src]="auto.photo" class="card-img-top" alt="{{auto.model}}" style="height: 200px; object-fit: cover;">
+              <div class="card-body">
+                <h5 class="card-title">{{auto.brand}} {{auto.model}}</h5>
+                <p class="card-text"><strong>Prix:</strong> {{auto.price | currency:'TND'}}</p>
+                <p class="card-text"><strong>Puissance:</strong> {{auto.power}} CV</p>
+                <p class="card-text"><strong>Disponible:</strong> {{auto.availability}} unités</p>
+                <button class="btn btn-outline-danger w-100" (click)="removeFromFavorites(auto)">
+                  ❌ Retirer des favoris
+                </button>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+      
+      <div class="text-center mt-4">
+        <button class="btn btn-outline-success" (click)="toggleView('search')">
+          ← Retourner à la recherche
+        </button>
+      </div>
+    }
+  </div>
+}
+
+<!-- Le footer NE s'affiche PAS dans la vue Favoris -->
+@if (currentView === 'search') {
+  <app-footer></app-footer>
+}

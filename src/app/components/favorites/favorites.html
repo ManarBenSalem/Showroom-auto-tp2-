@@ -1,0 +1,46 @@
+<p>favorites works!</p>
+<div class="favorites-container">
+  <div class="favorites-header">
+    <h2>❤️ Mes Voitures Favorites ❤️</h2>
+    <div class="favorites-stats">
+      <span class="badge bg-primary">{{ favoriteAutos.length }} voiture(s)</span>
+      <span class="badge bg-success">Total: {{ totalPrice | currency:'TND' }}</span>
+    </div>
+    
+    @if (favoriteAutos.length > 0) {
+      <button (click)="clearAllFavorites()" class="btn btn-danger btn-sm">
+        ❌ Vider tous les favoris
+      </button>
+    }
+  </div>
+
+  @if (favoriteAutos.length === 0) {
+    <div class="empty-favorites">
+      <div class="empty-icon">🤍</div>
+      <h3>Aucune voiture favorite</h3>
+      <p>Ajoutez des voitures à vos favoris en cliquant sur le cœur ❤️</p>
+      <p>Les favoris sont sauvegardés même après fermeture du navigateur</p>
+    </div>
+  }
+
+  <div class="favorites-grid">
+    @for (auto of favoriteAutos; track auto.id) {
+      <div class="favorite-card">
+        <div class="card">
+          <img [src]="auto.photo" class="card-img-top" [alt]="auto.model">
+          <div class="card-body">
+            <h5 class="card-title">{{ auto.brand }} {{ auto.model }}</h5>
+            <p class="card-text">
+              <strong>Prix:</strong> {{ auto.price | currency:'TND' }}<br>
+              <strong>Puissance:</strong> {{ auto.power }} CV<br>
+              <strong>Disponible:</strong> {{ auto.availability }} unités
+            </p>
+            <button (click)="removeFromFavorites(auto)" class="btn btn-outline-danger">
+              ❌ Retirer des favoris
+            </button>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</div>

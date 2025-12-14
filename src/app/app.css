@@ -1,0 +1,57 @@
+.container {
+    padding-top: 20px;
+}
+
+.row {
+    justify-content: center;
+}
+
+img {
+    width: 350px;
+}
+
+p {
+    text-align: justify;
+    color: green;
+}
+
+/* AJOUTER : Animation pour le changement de vue */
+.view-transition {
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Styles pour la vue Favoris */
+.favorites-view {
+    min-height: 70vh;
+}
+
+.empty-favorites {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 40px 20px;
+}
+
+.favorites-header {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.card-img-top {
+    border-bottom: 1px solid #dee2e6;
+}

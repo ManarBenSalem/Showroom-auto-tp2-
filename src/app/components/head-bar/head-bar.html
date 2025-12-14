@@ -1,0 +1,13 @@
+<div class="container-fluid header">
+  <div class="d-flex justify-content-between align-items-center">
+    <!-- Ajouter (click)="showSearch()" -->
+    <h1 (click)="showSearch()" style="cursor: pointer;">Welcome to my showroom (by manar ibn salem)</h1>
+    
+    <!-- Ajouter (click)="showFavorites()" -->
+    <div class="favorite-counter" (click)="showFavorites()" style="cursor: pointer;">
+      <span class="heart-icon">❤️</span>
+      <span class="count-badge">{{favoriteCount}}</span>
+      <span class="counter-text">Favoris</span>
+    </div>
+  </div>
+</div>

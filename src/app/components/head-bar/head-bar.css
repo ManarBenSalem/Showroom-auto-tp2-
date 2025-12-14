@@ -1,0 +1,87 @@
+.header {
+    padding: 50px;
+    background-color: green;
+}
+
+h1 {
+    color: aliceblue;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    margin: 0;
+}
+
+h1:hover {
+    opacity: 0.8;
+}
+
+/* NOUVEAUX STYLES pour le compteur de favoris */
+.favorite-counter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 10px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: white;
+}
+
+.favorite-counter:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+}
+
+.heart-icon {
+    font-size: 1.5rem;
+    animation: pulse 2s infinite;
+}
+
+.count-badge {
+    background-color: #ff4757;
+    color: white;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.counter-text {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .header {
+        padding: 30px 20px;
+    }
+    
+    h1 {
+        font-size: 1.5rem;
+    }
+    
+    .favorite-counter {
+        padding: 8px 15px;
+    }
+    
+    .counter-text {
+        display: none; /* Cacher le texte sur mobile */
+    }
+    
+    .heart-icon {
+        font-size: 1.2rem;
+    }
+}

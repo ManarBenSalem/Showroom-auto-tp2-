@@ -1,0 +1,42 @@
+<div class="container-fluid header">
+  <div class="input-group input-group-lg">
+    <span class="input-group-text">Brand</span>
+    <input (input)="selectAutoList(brand.value)" #brand type="text" class="form-control" placeholder="e.g. Audi">
+    <button (click)="selectAutoList(brand.value)" class="btn btn-success">Search</button>
+  </div>
+</div>
+
+<div class="container auto-container">
+  @for(auto of selectedAutos; track auto.id; let indice=$index; let even=$even; let odd=$odd) {
+    <div class="card" style="width: 18rem;">
+      <img [src]="auto.photo" class="card-img-top" />
+      <div class="card-body" [ngClass]="{'card-body-odd':odd,'card-body-even':even}">
+        <h5 class="card-title" [ngStyle]="autoTitleStyle(auto)"> {{indice}} {{auto.brand}} - {{auto.model}}</h5>
+        <p class="card-text">Power : {{auto.power}}</p>
+        <p class="card-text">Price : {{auto.price|currency:'TND'}}</p>
+        <p class="card-text">Only {{auto.availability}} units available</p>
+        
+        <!-- BOUTONS D'ACTION -->
+        <div class="d-flex justify-content-between mt-3">
+          <button class="btn btn-primary" (click)="showDetails(auto)">More details</button>
+          
+          <!-- NOUVEAU : Bouton Favori -->
+          <button 
+            class="btn btn-outline-danger" 
+            (click)="toggleFavorite(auto)"
+            [class.btn-danger]="auto.favorite"
+          >
+            @if(auto.favorite) {
+              ❤️
+            } @else {
+              🤍
+            }
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+  @empty {
+    <p>No cars found!</p>
+  }
+</div>
